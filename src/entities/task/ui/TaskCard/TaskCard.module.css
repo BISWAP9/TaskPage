@@ -1,0 +1,44 @@
+.card {
+  display: flex;
+  align-items: center;
+  width: 250px;
+  gap: 8px;
+  padding: 24px;
+  background: #2a2a2a;
+  border-radius: 8px;
+}
+
+.card:hover {
+  border-color: #4a4a4a;
+}
+
+.title {
+  flex: 1;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 2;
+  color: #e0e0e0;
+}
+
+.titleCompleted {
+  text-decoration: line-through;
+  color:  #888;
+}
+
+.status {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #3a3a3a;
+  color: transparent;
+}
+
+.statusCompleted {
+  background: #22c55e;
+  color: white;
+}

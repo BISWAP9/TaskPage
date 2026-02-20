@@ -1,0 +1,9 @@
+.taskPage {
+  width: 100%;
+  height: fit-content;
+  padding: 16px 24px;
+}
+
+.taskPageTitle {
+  text-align: center;
+}
