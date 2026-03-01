@@ -1,7 +1,7 @@
-import { TaskCard } from 'entities/task'
-import { DeleteButton, FilterButton } from 'shared/index'
+import { FilterButton } from 'shared/index'
 import styles from './TaskList.module.css'
 import { taskFilters, useTasks } from '../model/useTasks'
+import { TaskListItem } from './TaskListItem'
 
 export const TaskList = () => {
   const { tasks, filter, setFilter, removeTask } = useTasks()
@@ -22,12 +22,9 @@ export const TaskList = () => {
               </h3>
             </div>)
             : ( <ul className={styles.list}>
-              {tasks.map((task) => (
-                <li key={task.id} className={styles.listItem}>
-                    <TaskCard task={task} />
-                    <DeleteButton onAction={() => removeTask(task.id)} />
-                </li>
-              ))}
+              {tasks.map((task) => 
+                <TaskListItem key={task.id} task={task} onDelete={removeTask} />
+              )}
           </ul>)}
     </>
   )
