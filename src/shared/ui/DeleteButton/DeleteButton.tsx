@@ -9,6 +9,7 @@ export const DeleteButton = ({onAction}: Props) => (
        type="button"
        className={styles.deleteButton}
        onClick={onAction}
+       aria-label='Удалить' 
     >
       Удалить
     </button>

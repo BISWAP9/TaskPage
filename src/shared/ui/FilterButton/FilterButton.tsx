@@ -5,13 +5,15 @@ interface Props {
   active?: boolean
   onAction: () => void
   children: ReactNode
+  ariaLabel?: string
 }
 
-export const FilterButton = ({ active = false, onAction, children }: Props) =>  (
+export const FilterButton = ({ active = false, onAction, ariaLabel, children }: Props) =>  (
     <button
       type="button"
       className={`${styles.button} ${active ? styles.buttonActive : ''}`}
       onClick={onAction}
+      aria-label={ariaLabel}
     >
       {children}
     </button>

@@ -1,4 +1,4 @@
-import type { Task } from 'entities/task/model/types.ts'
+import type { Task } from 'entities/task/model/types'
 import styles from './TaskCard.module.css'
 
 export const TaskCard = ({ task }: { task: Task }) => (

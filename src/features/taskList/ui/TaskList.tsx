@@ -10,7 +10,7 @@ export const TaskList = () => {
     <>
       <div className={styles.filters}>
         {taskFilters.map(({ value, label }) => (
-          <FilterButton key={value} active={filter === value} onAction={() => setFilter(value)}>
+          <FilterButton key={value} active={filter === value} onAction={() => setFilter(value)} ariaLabel={`Фильтр: ${label}`}>
             {label}
           </FilterButton>
         ))}
