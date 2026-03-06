@@ -4,7 +4,7 @@ import { taskFilters, useTasks } from '../model/useTasks'
 import { TaskListItem } from './TaskListItem'
 
 export const TaskList = () => {
-  const { tasks, filter, setFilter, removeTask } = useTasks()
+  const { tasks, filter, setFilter, removeTask, isLoading, isError } = useTasks()
 
   return (
     <>
@@ -18,7 +18,10 @@ export const TaskList = () => {
       {!tasks.length 
           ? (<div className={styles.emptyContainer}>
             <h3 className={styles.emptyText}> 
-              {filter === 'all' ? 'Нет задач' : filter === 'completed' ? 'Нет завершённых задач' : 'Нет активных задач'}
+              {isLoading 
+              ? 'Загрузка задач...' 
+              : isError ? 'Извините, произошла ошибка при загрузке задач' 
+              : (!isLoading && !isError && filter === 'all') ? 'Нет задач' : filter === 'completed' ? 'Нет завершённых задач' : 'Нет активных задач'}
               </h3>
             </div>)
             : ( <ul className={styles.list}>

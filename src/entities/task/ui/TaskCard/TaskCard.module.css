@@ -6,6 +6,7 @@
   padding: 24px;
   background: #2a2a2a;
   border-radius: 8px;
+  box-sizing: border-box;
 }
 
 .card:hover {
@@ -19,11 +20,17 @@
   font-weight: 500;
   line-height: 2;
   color: #e0e0e0;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  overflow: hidden;
 }
 
 .titleCompleted {
   text-decoration: line-through;
   color:  #888;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  overflow: hidden;
 }
 
 .status {
