@@ -1,7 +1,8 @@
 import type { Task } from 'entities/task/model/types'
 import styles from './TaskCard.module.css'
+import React from 'react'
 
-export const TaskCard = ({ task }: { task: Task }) => (
+export const TaskCard = React.memo(({ task }: { task: Task }) => (
     <article className={styles.card}>
       <span
         className={`${styles.status} ${task.completed ? styles.statusCompleted : ''}`}
@@ -13,3 +14,4 @@ export const TaskCard = ({ task }: { task: Task }) => (
       </h3>
     </article>
   )
+)
