@@ -41,12 +41,12 @@ const config = [
         version: "detect",
       },
       "boundaries/elements": [
-        { type: "shared", pattern: "src/shared/*" },
-        { type: "entities", pattern: "src/entities/*" },
-        { type: "features", pattern: "src/features/*" },
-        { type: "widgets", pattern: "src/widgets/*" },
-        { type: "pages", pattern: "src/pages/*" },
-        { type: "app", pattern: "src/app/*" },
+        { type: "shared", pattern: "src/6-shared/*" },
+        { type: "entities", pattern: "src/5-entities/*" },
+        { type: "features", pattern: "src/4-features/*" },
+        { type: "widgets", pattern: "src/3-widgets/*" },
+        { type: "pages", pattern: "src/2-pages/*" },
+        { type: "app", pattern: "src/1-app/*" },
       ],
     },
     rules: {
