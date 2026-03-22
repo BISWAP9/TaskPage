@@ -10,6 +10,11 @@ const RegisterPage = lazy(() =>
 const SubscribeWizard = lazy(() =>
   import('pages/wizard').then(module => ({ default: module.SubscribeWizard })),
 )
+const RefExamplesPage = lazy(() =>
+  import('pages/refExamples').then(module => ({
+    default: module.RefExamplesPage,
+  })),
+)
 
 const PageFallback = () => (
   <Box sx={{ display: 'grid', placeItems: 'center', py: 10 }}>
@@ -43,6 +48,14 @@ export const router = createBrowserRouter([
         element: (
           <Suspense fallback={<PageFallback />}>
             <SubscribeWizard />
+          </Suspense>
+        ),
+      },
+      {
+        path: 'ref-examples',
+        element: (
+          <Suspense fallback={<PageFallback />}>
+            <RefExamplesPage />
           </Suspense>
         ),
       },

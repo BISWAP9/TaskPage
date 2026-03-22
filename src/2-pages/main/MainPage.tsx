@@ -18,6 +18,9 @@ export const Main = () => (
           <Button component={NavLink} to="/wizard" variant="outlined">
             К подписке
           </Button>
+          <Button component={NavLink} to="/ref-examples" variant="outlined">
+            Ref примеры
+          </Button>
         </Box>
       </Stack>
     </Paper>
