@@ -1,5 +1,3 @@
-import { commonEmailSchema, validationMessages } from 'shared'
+import { commonEmailSchema } from 'shared'
 
-export const subscriptionEmailSchema = commonEmailSchema.refine(Boolean, {
-  message: validationMessages.email,
-})
+export const subscriptionEmailSchema = commonEmailSchema
