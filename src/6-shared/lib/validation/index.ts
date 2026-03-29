@@ -1,1 +1,6 @@
-export { commonEmailSchema, commonUrlSchema, validationMessages } from './zod'
+export {
+  commonEmailSchema,
+  commonPasswordSchema,
+  commonUrlSchema,
+  validationMessages,
+} from './zod'

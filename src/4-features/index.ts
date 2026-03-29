@@ -7,3 +7,4 @@ export {
   DebouncedLogger,
   WebSocketLogger,
 } from './refExamples'
+export { ProtectedRoute, SignInForm, ProfileInfo, useAuth } from './authRouting'

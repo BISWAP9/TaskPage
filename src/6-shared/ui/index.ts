@@ -1,0 +1,1 @@
+export { DetailIconRow } from './DetailIconRow'

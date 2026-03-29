@@ -1,4 +1,3 @@
-export { App  } from './App'
-export { router } from './routing'
+export { App } from './App'
 export { AppProviders, appTheme } from './providers'
 export { AppLayout } from './layouts'
