@@ -1,4 +1,4 @@
-import { useFieldArray, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { registerDefaultValues, registerSchema, type RegisterFormValues } from './schema'
 
@@ -9,13 +9,5 @@ export const useRegisterForm = () => {
     mode: 'onChange',
   })
 
-  const socialLinks = useFieldArray({
-    control: form.control,
-    name: 'socialLinks',
-  })
-
-  return {
-    form,
-    socialLinks,
-  }
+  return { form }
 }

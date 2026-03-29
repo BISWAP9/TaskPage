@@ -56,6 +56,10 @@ const config = [
         {
           default: "disallow",
           rules: [
+            {
+              from: "app",
+              allow: ["pages", "widgets", "features", "entities", "shared"],
+            },
             { from: "features", allow: ["shared", "entities"] },
             { from: "entities", allow: ["shared"] },
             { from: "widgets", allow: ["shared", "features", "entities"] },

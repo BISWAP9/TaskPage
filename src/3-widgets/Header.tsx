@@ -1,13 +1,31 @@
 import { AppBar, Box, Button, Container, Toolbar, Typography } from '@mui/material'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useAuthContext } from 'shared/lib/authContext'
 
-const navItems = [
+const commonItems = [
   { to: '/', label: 'Главная' },
-  { to: '/register', label: 'Регистрация' },
-  { to: '/wizard', label: 'Подписка' },
+  { to: '/public', label: 'Публичная' },
 ]
 
+const guestItems = [
+  { to: '/login', label: 'Вход' },
+  { to: '/register', label: 'Регистрация' },
+]
+
+const authItems = [{ to: '/profile', label: 'Профиль' }]
+
 export const Header = () => {
+  const { accessToken, logout } = useAuthContext()
+  const navigate = useNavigate()
+  const isAuthenticated = !!accessToken
+
+  const handleLogout = () => {
+    logout()
+    navigate('/login', { replace: true })
+  }
+
+  const navItems = [...commonItems, ...(isAuthenticated ? authItems : guestItems)]
+
   return (
     <AppBar
       position="sticky"
@@ -52,6 +70,12 @@ export const Header = () => {
                 {item.label}
               </Button>
             ))}
+
+            {isAuthenticated && (
+              <Button color="error" variant="outlined" size="small" onClick={handleLogout}>
+                Выйти
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </Container>

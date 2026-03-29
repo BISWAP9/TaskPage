@@ -1,17 +1,48 @@
-import { Box, Button, Container, Paper, Stack, TextField, Typography } from '@mui/material'
+import { Alert, Box, Button, Container, Paper, Stack, TextField, Typography } from '@mui/material'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuthContext } from 'shared/lib/authContext'
+import { extractApiError } from 'shared/lib/apiError'
 import { type RegisterFormValues, useRegisterForm } from '../model'
+import { useSignUpApi } from '../api'
 
 export const RegisterForm = () => {
-  const { form, socialLinks } = useRegisterForm()
+  const navigate = useNavigate()
+  const { login } = useAuthContext()
+  const { form } = useRegisterForm()
+  const { mutateAsync, isPending } = useSignUpApi()
+  const [serverError, setServerError] = useState<string | null>(null)
+
   const {
     register,
     handleSubmit,
     formState: { errors, isValid, isSubmitting },
   } = form
-  const { fields, append, remove } = socialLinks
 
-  const onSubmit = (data: RegisterFormValues) => {
-    console.log('register data', data)
+  const onSubmit = async (data: RegisterFormValues) => {
+    setServerError(null)
+
+    try {
+      const response = await mutateAsync({
+        email: data.email,
+        name: data.username,
+        password: data.password,
+      })
+
+      const rawToken = response.accessToken.replace(/^Bearer\s+/i, '')
+
+      login({
+        accessToken: rawToken,
+        refreshToken: '',
+        userId: response.user.id,
+        name: data.username,
+      })
+
+      navigate('/profile', { replace: true })
+    } catch (error) {
+      const message = await extractApiError(error)
+      setServerError(message)
+    }
   }
 
   return (
@@ -20,6 +51,12 @@ export const RegisterForm = () => {
         <Typography variant="h4" component="h1" align="center" sx={{ mb: 3 }}>
           Регистрация
         </Typography>
+
+        {serverError && (
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {serverError}
+          </Alert>
+        )}
 
         <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
           <Stack spacing={2}>
@@ -58,39 +95,12 @@ export const RegisterForm = () => {
               helperText={errors.confirmPassword?.message}
             />
 
-            <Typography variant="subtitle1" sx={{ mt: 1 }}>
-              Социальные ссылки
-            </Typography>
-
-            {fields.map((field, index) => (
-              <Stack key={field.id} direction="row" spacing={1} alignItems="flex-start">
-                <TextField
-                  label={`Ссылка #${index + 1}`}
-                  type="url"
-                  placeholder="https://github.com/username"
-                  fullWidth
-                  {...register(`socialLinks.${index}.url` as const)}
-                  error={Boolean(errors.socialLinks?.[index]?.url)}
-                  helperText={errors.socialLinks?.[index]?.url?.message}
-                />
-                <Button
-                  type="button"
-                  variant="outlined"
-                  color="error"
-                  onClick={() => remove(index)}
-                  disabled={fields.length === 1}
-                  sx={{ minWidth: 110, height: 56 }}
-                >
-                  Удалить
-                </Button>
-              </Stack>
-            ))}
-
-            <Button type="button" variant="outlined" onClick={() => append({ url: '' })}>
-              Добавить ссылку
-            </Button>
-
-            <Button disabled={!isValid || isSubmitting} type="submit" variant="contained" size="large">
+            <Button
+              disabled={!isValid || isSubmitting || isPending}
+              type="submit"
+              variant="contained"
+              size="large"
+            >
               Зарегистрироваться
             </Button>
           </Stack>
@@ -99,4 +109,3 @@ export const RegisterForm = () => {
     </Container>
   )
 }
-
